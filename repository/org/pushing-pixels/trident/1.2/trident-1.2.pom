@@ -1,0 +1,58 @@
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.pushing-pixels</groupId>
+	<artifactId>trident</artifactId>
+	<version>1.2</version>
+	<packaging>jar</packaging>
+	<name>Trident Animation Library</name>
+	<description>  
+		The goal of this project is to provide a powerful and extensible animation library for Java 
+		applications. It requires Java 6+ at compile and runtime, and is available under BSD license
+  	</description>
+	<url>http://kenai.com/projects/trident/pages/Home</url>
+	<licenses>
+		<license>
+			<name>BSD</name>
+			<url>http://www.opensource.org/licenses/bsd-license.php</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<url>http://kenai.com/projects/trident/sources/source/show</url>
+		<connection>https://svn.kenai.com/svn/trident~source </connection>
+	</scm>
+	<developers>
+		<developer>
+			<name>Kirill Grouchnikov </name>
+			<url>http://www.pushing-pixels.org/</url>
+		</developer>		
+	</developers>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<compilerVersion>1.6</compilerVersion>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.swt.win32.win32</groupId>
+			<artifactId>x86</artifactId>
+			<version>3.3.0-v3346</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>android</artifactId>
+			<version>2.1_r1</version>		
+		</dependency>
+	</dependencies>	
+</project>
+

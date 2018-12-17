@@ -1,0 +1,64 @@
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.java.net.substance</groupId>
+	<artifactId>substance</artifactId>
+	<version>6.0</version>
+	<packaging>jar</packaging>
+	<name>Substance Look and Feel</name>
+	<description>  
+		The goal of this project is to provide a rock solid, fast and extensible library for creating 
+		visually appealing and consistent Swing applications. 
+  	</description>
+  	<inceptionYear>2006</inceptionYear>
+	<url>https://substance.dev.java.net/</url>
+	<licenses>
+		<license>
+			<name>Berkeley Software Distribution (BSD) License</name>
+			<url>https://substance.dev.java.net/license.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<url>https://substance.dev.java.net/source/browse/substance/trunk/</url>
+		<connection>https://substance.dev.java.net/svn/substance/trunk</connection>
+	</scm>
+	<developers>
+		<developer>
+			<name>Kirill Grouchnikov </name>
+			<url>http://www.pushing-pixels.org/</url>
+		</developer>
+	</developers>
+	<dependencies>
+		<dependency>
+			<groupId>org.pushing-pixels</groupId>
+			<artifactId>trident</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>net.java.dev.laf-widget</groupId>
+			<artifactId>laf-widget</artifactId>
+			<version>5.0</version>
+		</dependency>
+		<dependency>
+			<groupId>net.java.dev.laf-plugin</groupId>
+			<artifactId>laf-plugin</artifactId>
+			<version>1.1</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
