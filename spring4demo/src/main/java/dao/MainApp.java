@@ -4,6 +4,10 @@ import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallback;
+import org.springframework.transaction.support.TransactionTemplate;
 
 public class MainApp {
 	public static void main(String[] args) {
@@ -29,9 +33,21 @@ public class MainApp {
 		studentJDBCTemplate.update(2, 20);
 
 		System.out.println("----Listing Record with ID = 2 -----");
-		Student student = studentJDBCTemplate.getStudent(2);
+		Student student = studentJDBCTemplate.getStudentBigerThan(2);
 		System.out.print("ID : " + student.getId());
 		System.out.print(", Name : " + student.getName());
 		System.out.println(", Age : " + student.getAge());
+
+		TransactionTemplate tt = context.getBean("transactionTemplate", TransactionTemplate.class);
+		tt.execute(new TransactionCallback<List<Student>>() {
+
+			@Override
+			public List<Student> doInTransaction(TransactionStatus arg0) {
+				studentJDBCTemplate.create("zhangsan", 15);
+				return null;
+			}
+		});
+		
+		Student st = studentJDBCTemplate.getStudents(2);
 	}
 }
