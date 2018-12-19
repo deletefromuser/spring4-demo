@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+	<!-- <bean id="say" class="com.hello.demo.SayHello"> -->
+	<!-- <property name="name" value="fengsigaoju"></property> -->
+	<!-- </bean> -->
+	<!-- <bean id="bf" class="com.hello.aop.BeforeSay"> -->
+	<!-- </bean> -->
+	<!-- <bean id="af" class="com.hello.aop.AfterSay"> -->
+	<!-- </bean> -->
+
+	<!-- <aop:config> -->
+	<!-- <aop:aspect ref="bf">具体哪一个切入类 -->
+	<!-- <aop:before method="beforesay" -->
+	<!-- pointcut="execution(* com.hello.demo.SayHello.say(..))"></aop:before>method为类的某个方法，ref是哪一个类,pointcut是执行到那边增强（即切入点的表达式，调用该方法增强 -->
+	<!-- </aop:aspect> -->
+	<!-- <aop:aspect ref="af"> -->
+	<!-- <aop:after method="aftersay" -->
+	<!-- pointcut="execution(* com.hello.demo.SayHello.say(..))"></aop:after>具体 -->
+	<!-- </aop:aspect> -->
+	<!-- </aop:config> -->
+
+	<bean class="java.lang.String" id="address3">
+		<constructor-arg type="java.lang.String" value="a1" />
+	</bean>
+</beans> 

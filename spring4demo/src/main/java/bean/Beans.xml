@@ -1,14 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<beans xmlns = "http://www.springframework.org/schema/beans"
-   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation = "http://www.springframework.org/schema/beans
-   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd
+   http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
 
-   <bean id = "helloWorld" class = "bean.HelloWorld" scope="singleton" destroy-method = "destroy">
-      <property name = "message" value = "Hello World!"/>
-   </bean>
-   
-   <bean class = "bean.InitHelloWorld" />
+	<context:component-scan
+		base-package="bean,listener" />
+
+	<bean id="helloWorld" class="bean.HelloWorld" scope="singleton"
+		destroy-method="destroy" lazy-init="true">
+		<property name="message" value="Hello World!" />
+	</bean>
+
+	<!-- <bean class="bean.InitHelloWorld" /> -->
+
+	<bean id="textEditor" class="bean.TextEditor" lazy-init="true">
+		<property name="spellChecker">
+			<bean id="spellChecker" class="bean.SpellChecker" />
+		</property>
+	</bean>
+
+	<bean class="java.lang.String" id="address1">
+		<constructor-arg type="java.lang.String" value="a1" />
+	</bean>
+	<bean class="java.lang.String" id="address2">
+		<constructor-arg type="java.lang.String" value="a2" />
+	</bean>
+
+	<bean id="javaCollection" class="bean.JavaCollection">
+
+		<!-- results in a setAddressList(java.util.List) call -->
+		<property name="addressList">
+			<list>
+				<ref bean="address1" />
+				<ref bean="address2" />
+				<value>Pakistan</value>
+			</list>
+		</property>
+
+		<!-- Passing bean reference for java.util.Set -->
+		<property name="addressSet">
+			<set>
+				<ref bean="address1" />
+				<ref bean="address2" />
+				<value>Pakistan</value>
+			</set>
+		</property>
+
+		<!-- Passing bean reference for java.util.Map -->
+		<property name="addressMap">
+			<map>
+				<entry key="one" value="INDIA" />
+				<entry key="two" value-ref="address1" />
+				<entry key="three" value-ref="address2" />
+			</map>
+		</property>
+
+		<!-- results in a setAddressProp(java.util.Properties) call -->
+		<property name="addressProp">
+			<props>
+				<prop key="one">INDIA</prop>
+				<prop key="one">INDIA</prop>
+				<prop key="two">Pakistan</prop>
+				<prop key="three">USA</prop>
+				<prop key="four">USA</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="cat" class="bean.Cat"></bean>
+	<bean id="dog" class="bean.Dog"></bean>
+
+	<!-- <bean id="user" class="bean.User"> -->
+	<!-- <property name="cat" ref="cat"></property> -->
+	<!-- <property name="dog" ref="dog"></property> -->
+	<!-- <property name="str" value="haha"></property> -->
+	<!-- </bean> -->
+	<bean id="user" class="bean.User" autowire="byName">
+		<property name="str" value="haha"></property>
+	</bean>
+
+<!-- 	<aop:config> -->
+<!-- 		<aop:aspect id="time" ref="timeHandler"> -->
+<!-- 			<aop:pointcut id="addAllMethod" -->
+<!-- 				expression="execution(* bean.AnnoTest.*(..))" /> -->
+<!-- 			<aop:before method="printTime" pointcut-ref="addAllMethod" /> -->
+<!-- 			<aop:after method="printTime" pointcut-ref="addAllMethod" /> -->
+<!-- 		</aop:aspect> -->
+<!-- 	</aop:config> -->
 
 </beans>
