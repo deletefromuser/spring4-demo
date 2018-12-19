@@ -87,13 +87,15 @@
 		<property name="str" value="haha"></property>
 	</bean>
 
-<!-- 	<aop:config> -->
-<!-- 		<aop:aspect id="time" ref="timeHandler"> -->
-<!-- 			<aop:pointcut id="addAllMethod" -->
-<!-- 				expression="execution(* bean.AnnoTest.*(..))" /> -->
-<!-- 			<aop:before method="printTime" pointcut-ref="addAllMethod" /> -->
-<!-- 			<aop:after method="printTime" pointcut-ref="addAllMethod" /> -->
-<!-- 		</aop:aspect> -->
-<!-- 	</aop:config> -->
+	<bean id="timeHandler" class="listener.TimeHandler"></bean>
+
+	<aop:config>
+		<aop:aspect id="time" ref="timeHandler">
+			<aop:pointcut id="addAllMethod"
+				expression="execution(* bean.AnnoTest.*(..))" />
+			<aop:before method="printTime" pointcut-ref="addAllMethod" />
+			<aop:after method="printTimeAfter" pointcut-ref="addAllMethod" />
+		</aop:aspect>
+	</aop:config>
 
 </beans>
