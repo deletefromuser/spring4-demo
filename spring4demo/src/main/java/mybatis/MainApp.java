@@ -24,11 +24,14 @@ public class MainApp {
 				System.out.print("ID : " + stu.getId());
 				System.out.print(", Name : " + stu.getName());
 				System.out.println(", Age : " + stu.getAge());
+<<<<<<< HEAD
 
 				stu = (Student)session.selectOne("mybatis.StudentMapper.selectStudent", 25);
 				System.out.print("ID : " + stu.getId());
 				System.out.print(", Name : " + stu.getName());
 				System.out.println(", Age : " + stu.getAge());
+=======
+>>>>>>> 120188af9bd62a4e93f5ca7adcfc94529382787a
 			} finally {
 				session.close();
 			}
