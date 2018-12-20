@@ -46,7 +46,7 @@
 		<constructor-arg type="java.lang.String" value="a1" />
 	</bean>
 	
-<!-- 	<bean id="ctxUtil" class="servlet.CtxUtil"></bean> -->
+	<bean id="ctxUtil" class="servlet.CtxUtil"></bean>
 	
 	<context:component-scan base-package="service,servlet"></context:component-scan>
 	
