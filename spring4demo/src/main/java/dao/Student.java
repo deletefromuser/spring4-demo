@@ -28,4 +28,9 @@ public class Student {
 	public Integer getId() {
 		return id;
 	}
+
+	@Override
+	public String toString() {
+		return "ID : " + getId() + ", Name : " + getName() + ", Age : " + getAge();
+	}
 }
