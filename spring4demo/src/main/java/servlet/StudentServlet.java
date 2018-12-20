@@ -38,16 +38,26 @@ public class StudentServlet extends HttpServlet {
 	}
 
 	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		super.service(req, resp);
+	}
+
+	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String user = req.getParameter("id");
 
 		Student stu = studentService.getStudent(Integer.parseInt(user));
 
-		resp.setContentType("text/html");
-		resp.setCharacterEncoding("UTF-8");
-		PrintWriter writer = resp.getWriter();
-		writer.append("<!DOCTYPE html>").append("<html><head></head><body>").append("student是" + stu)
-				.append("</body></html>");
+//		resp.setContentType("text/html");
+//		resp.setCharacterEncoding("UTF-8");
+//		PrintWriter writer = resp.getWriter();
+//		writer.append("<!DOCTYPE html>").append("<html><head></head><body>").append("student是" + stu)
+//				.append("</body></html>");
+
+		req.setAttribute("student", stu);
+		req.getRequestDispatcher("/student.jsp").forward(req, resp);
+
 	}
 
 }
