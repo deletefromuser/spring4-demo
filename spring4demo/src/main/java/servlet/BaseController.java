@@ -1,4 +1,4 @@
-package sevlet;
+package servlet;
 import java.io.IOException;
 import java.lang.reflect.Method;
 

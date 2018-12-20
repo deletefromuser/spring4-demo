@@ -1,4 +1,4 @@
-package sevlet;
+package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,8 +27,10 @@ public class StudentServlet extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-		studentService = ctx.getBean(StudentService.class);
+//		WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+//		studentService = ctx.getBean(StudentService.class);
+		// -----------------------------------------
+		studentService = CtxUtil.getBean(StudentService.class);
 		// -----------------------------------------
 //		ApplicationContext ctx = new ClassPathXmlApplicationContext("application.xml");
 //		studentService = ctx.getBean(StudentService.class);
