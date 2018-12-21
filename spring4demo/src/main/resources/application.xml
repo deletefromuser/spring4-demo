@@ -66,16 +66,18 @@
 	<!-- <property name="studentMapper" ref="studentMapper"></property> -->
 	<!-- </bean> -->
 
-<!-- 	<bean -->
-<!-- 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
-<!-- 		<property name="prefix" value="/" /> -->
-<!-- 		<property name="suffix" value=".jsp" /> -->
-<!-- 	</bean> -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/" />
+		<property name="suffix" value=".jsp" />
+		<property name="viewNames" value="jsp/*" />
+		<property name="order" value="1" />
+	</bean>
 
 	<!-- 模板解析器 -->
 	<bean id="templateResolver"
 		class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
-		<property name="prefix" value="/WEB-INF/thymeleaf/" />
+		<property name="prefix" value="/WEB-INF/" />
 		<property name="suffix" value=".html" />
 		<property name="templateMode" value="HTML5" />
 		<property name="cacheable" value="false" />
@@ -88,6 +90,8 @@
 	</bean>
 
 	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+		<property name="viewNames" value="thymeleaf/*" />
+		<property name="order" value="2" />
 		<property name="templateEngine" ref="templateEngine" />
 		<property name="characterEncoding" value="UTF-8" />
 	</bean>

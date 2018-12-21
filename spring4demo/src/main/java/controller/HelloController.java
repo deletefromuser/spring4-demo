@@ -12,18 +12,18 @@ public class HelloController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String printHello(ModelMap model) {
 		model.addAttribute("message", "Spring MVC Framework by thymeleaf!");
-		return "hello";
+		return "thymeleaf/hello";
 	}
 	
-//	@RequestMapping(value="/jsp", method = RequestMethod.GET)
-//	public String printHelloJsp(ModelMap model) {
-//		model.addAttribute("message", "Spring MVC Framework by jsp!");
-//		return "hello";
-//	}
+	@RequestMapping(value="/jsp", method = RequestMethod.GET)
+	public String printHelloJsp(ModelMap model) {
+		model.addAttribute("message", "Spring MVC Framework by jsp!");
+		return "jsp/hello";
+	}
 
 	@RequestMapping(value = "/calc/{a}/{b}", method = { RequestMethod.GET })
 	public String calc(@PathVariable int a, @PathVariable int b, ModelMap model) {
 		model.addAttribute("message", "sum is " + (a + b));
-		return "hello";
+		return "thymeleaf/hello";
 	}
 }
