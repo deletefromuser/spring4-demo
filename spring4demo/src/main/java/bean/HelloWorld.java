@@ -17,13 +17,11 @@ public class HelloWorld implements InitializingBean  {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		// TODO Auto-generated method stub
 		System.out.println("init");
 	}
 
 //	@Override
 	public void destroy() throws Exception {
-		// TODO Auto-generated method stub
 		System.out.println("des");
 	}
 
