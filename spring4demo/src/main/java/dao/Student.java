@@ -1,5 +1,18 @@
 package dao;
 
+/*
+CREATE TABLE Student(
+   ID   INT NOT NULL AUTO_INCREMENT,
+   NAME VARCHAR(20) NOT NULL,
+   AGE  INT NOT NULL,
+   PRIMARY KEY (ID)
+);
+
+ CREATE TABLE pet (name VARCHAR(20) primary key, owner VARCHAR(20),
+species VARCHAR(20), sex CHAR(1), birth DATE, death DATE);
+
+ */
+
 public class Student {
 	private Integer age;
 	private String name;
