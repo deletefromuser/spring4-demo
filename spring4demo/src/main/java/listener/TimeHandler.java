@@ -1,6 +1,5 @@
 package listener;
 
-import org.aopalliance.intercept.Joinpoint;
 import org.aspectj.lang.JoinPoint;
 
 public class TimeHandler {

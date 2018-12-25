@@ -2,12 +2,12 @@ package config;
 
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
-import org.springframework.beans.factory.xml.ResourceEntityResolver;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.ViewResolver;
@@ -19,7 +19,13 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 
 @Configuration
 @ComponentScan("service,servlet,controller")
-public class Config {
+public class Config implements ApplicationContextAware {
+
+	private ApplicationContext applicationContext;
+
+	public void setApplicationContext(ApplicationContext applicationContext) {
+		this.applicationContext = applicationContext;
+	}
 
 	@Bean
 	public DriverManagerDataSource datasource() {
@@ -31,16 +37,6 @@ public class Config {
 		return dataSource;
 	}
 
-//	@Bean
-//	public DriverManagerDataSource getDatasource() {
-//		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//		dataSource.setDriverClassName("");
-//		dataSource.setUrl("jdbc:mariadb://localhost:3306/spring4demodb");
-//		dataSource.setUsername("root");
-//		dataSource.setPassword("");
-//		return dataSource;
-//	}
-
 	@Bean
 	public SqlSessionFactoryBean sqlSessionFactory() {
 		SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
@@ -48,7 +44,7 @@ public class Config {
 		factory.setConfigLocation(new ClassPathResource("mybatis/mybatis_config.xml"));
 		return factory;
 	}
-	
+
 	@Bean
 	public MapperScannerConfigurer mapperScannerConfigurer() {
 		MapperScannerConfigurer obj = new MapperScannerConfigurer();
@@ -63,19 +59,11 @@ public class Config {
 		obj.setDataSource(datasource());
 		return obj;
 	}
-	
+
 	@Bean
 	public servlet.CtxUtil ctxUtil() {
 		return new servlet.CtxUtil();
 	}
-
-//	@Bean
-//	public SqlSessionFactoryBean sqlSessionFactory1() {
-//		SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
-//		factory.setDataSource(datasource());
-//		factory.setConfigLocation(new ClassPathResource("classpath:mybatis/mybatis_config.xml"));
-//		return factory;
-//	}
 
 	@Bean
 	public ViewResolver viewResolver() {
@@ -90,11 +78,11 @@ public class Config {
 	@Bean
 	public ITemplateResolver templateResolver() {
 		SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+		templateResolver.setApplicationContext(this.applicationContext);
 		templateResolver.setTemplateMode("HTML5");
 		templateResolver.setPrefix("/WEB-INF/");
 		templateResolver.setSuffix(".html");
-		templateResolver.setCharacterEncoding("utf-8");
-
+		templateResolver.setCharacterEncoding("UTF-8");
 		templateResolver.setCacheable(false);
 		return templateResolver;
 	}
@@ -110,7 +98,7 @@ public class Config {
 	public ThymeleafViewResolver viewResolverThymeLeaf() {
 		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
 		viewResolver.setTemplateEngine(templateEngine());
-		viewResolver.setCharacterEncoding("utf-8");
+		viewResolver.setCharacterEncoding("UTF-8");
 		viewResolver.setOrder(2);
 		viewResolver.setViewNames(new String[] { "thymeleaf/*" });
 		return viewResolver;

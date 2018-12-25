@@ -1,6 +1,5 @@
 package bean;
 
-import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
 public class HelloWorld implements InitializingBean  {

@@ -1,19 +1,10 @@
 package mainC;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import bean.AnnoTest;
-import bean.HelloWorld;
-import bean.JavaBasedConf;
-import bean.JavaCollection;
-import bean.Msg;
-import bean.MsgA;
-import bean.TextEditor;
-import bean.User;
-import listener.CustomEventPublisher;
 
 public class MainHello {
 	public static void main(String[] args) {
