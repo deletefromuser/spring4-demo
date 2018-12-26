@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings
+    xmlns="http://dozermapper.github.io/schema/bean-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://dozermapper.github.io/schema/bean-mapping http://dozermapper.github.io/schema/bean-mapping.xsd">
+    <configuration>
+        <stop-on-errors>true</stop-on-errors>
+        <date-format>MM/dd/yyyy HH:mm</date-format>
+        <wildcard>true</wildcard>
+    </configuration>
+    <mapping>
+        <class-a>dao.Student</class-a>
+        <class-b>dozer.Worker</class-b>
+        <field>
+            <a>id</a>
+            <b>studentId</b>
+        </field>
+    </mapping>
+     <mapping wildcard="false">
+        <class-a>dao.Student</class-a>
+        <class-b>dozer.WorkerB</class-b>
+        <field>
+            <a>id</a>
+            <b>studentId</b>
+        </field>
+    </mapping>
+</mappings>

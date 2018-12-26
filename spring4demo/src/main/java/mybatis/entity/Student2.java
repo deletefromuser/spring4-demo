@@ -30,4 +30,9 @@ public class Student2 {
     public void setAge(Integer age) {
         this.age = age;
     }
+    
+    @Override
+	public String toString() {
+		return "ID : " + getId() + ", Name : " + getName() + ", Age : " + getAge();
+	}
 }

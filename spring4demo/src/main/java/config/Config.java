@@ -1,5 +1,7 @@
 package config;
 
+import java.io.IOException;
+
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.ApplicationContext;
@@ -7,7 +9,9 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.ViewResolver;
@@ -16,6 +20,10 @@ import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
+
+import com.github.dozermapper.spring.DozerBeanMapperFactoryBean;
+
+import dao.Student;
 
 @Configuration
 @ComponentScan("service,servlet,controller")
@@ -102,6 +110,23 @@ public class Config implements ApplicationContextAware {
 		viewResolver.setOrder(2);
 		viewResolver.setViewNames(new String[] { "thymeleaf/*" });
 		return viewResolver;
+	}
+
+	@Bean
+	@Scope("singleton")
+	public DozerBeanMapperFactoryBean dozerMapper(ResourcePatternResolver resourcePatternResolver) throws IOException {
+		DozerBeanMapperFactoryBean factoryBean = new DozerBeanMapperFactoryBean();
+		factoryBean.setMappingFiles(resourcePatternResolver.getResources("classpath*:/*dozer-mapping.xml"));
+		return factoryBean;
+	}
+
+	@Bean
+	public Student student1() {
+		Student stu = new Student();
+		stu.setAge(14);
+		stu.setId(3652);
+		stu.setName("tom");
+		return stu;
 	}
 
 }
