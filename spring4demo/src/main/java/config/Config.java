@@ -46,10 +46,11 @@ public class Config implements ApplicationContextAware {
 	}
 
 	@Bean
-	public SqlSessionFactoryBean sqlSessionFactory() {
+	public SqlSessionFactoryBean sqlSessionFactory(ResourcePatternResolver resourcePatternResolver) throws IOException {
 		SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
 		factory.setDataSource(datasource());
-		factory.setConfigLocation(new ClassPathResource("mybatis/mybatis_config.xml"));
+//		factory.setConfigLocation(new ClassPathResource("mybatis/mybatis_config.xml"));
+		factory.setMapperLocations(resourcePatternResolver.getResources("classpath*:mybatis/**/*apper.xml"));
 		return factory;
 	}
 

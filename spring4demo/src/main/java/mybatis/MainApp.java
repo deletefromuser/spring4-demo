@@ -8,10 +8,13 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import config.Config;
 import dao.Student;
 import mybatis.entity.Pet;
 import mybatis.mapper.PetMapper;
+import servlet.CtxUtil;
 
 public class MainApp {
 	public static void main(String[] args) {
@@ -32,14 +35,15 @@ public class MainApp {
 				System.out.print("ID : " + stu.getId());
 				System.out.print(", Name : " + stu.getName());
 				System.out.println(", Age : " + stu.getAge());
-				
-				PetMapper pm = session.getMapper(PetMapper.class);
+
+//				PetMapper pm = session.getMapper(PetMapper.class);
+				PetMapper pm = new AnnotationConfigApplicationContext(Config.class).getBean(PetMapper.class);
 				Pet pet = new Pet();
 				pet.setBirth(new Date());
 				pet.setDeath(new Date());
 				pet.setName("dd");
 				pm.insert(pet);
-				
+
 				Pet rp = pm.selectByPrimaryKey("dd");
 				System.out.print("pet name : " + rp.getName());
 				System.out.print(", pet Birth : " + rp.getBirth());
