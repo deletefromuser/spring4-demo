@@ -1,0 +1,58 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+            http://maven.apache.org/xsd/settings-1.0.0.xsd">
+	 <proxies>
+      <proxy>
+         <id>my-proxy</id>
+         <active>true</active>
+         <protocol>http</protocol>
+         <host>192.168.200.15</host>
+         <port>6437</port>
+         <username>chenxiaobo</username>
+         <password>omron99</password>
+         
+         
+      </proxy>
+    </proxies>
+	<!-- 这个是配置阿里Maven镜像 -->
+	<!-- <mirrors>
+		
+		<mirror>    
+      <id>ibiblio.org</id>    
+      <name>ibiblio Mirror of http://repo1.maven.org/maven2/</name>    
+      <url>http://mirrors.ibiblio.org/pub/mirrors/maven2</url>    
+      <mirrorOf>central</mirrorOf>    
+   </mirror>  
+	</mirrors> -->
+	
+	<profiles>
+		<profile>
+			<id>nexus</id>
+			<repositories>
+				<repository>
+					<id>central</id>
+					<url>http://repo.maven.apache.org/maven2</url>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+		</profile>
+		<profile>
+			<id>jdk18</id>
+			<activation>
+				<jdk>1.8</jdk>
+			</activation>
+			<properties>
+				<maven.compiler.source>1.8</maven.compiler.source>
+				<maven.compiler.target>1.8</maven.compiler.target>
+				<maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+			</properties>
+		</profile>
+	</profiles>
+ 
+	<activeProfiles>
+		<activeProfile>nexus</activeProfile>
+	</activeProfiles>
+</settings>
