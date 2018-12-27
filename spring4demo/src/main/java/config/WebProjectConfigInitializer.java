@@ -1,30 +1,38 @@
 package config;
 
+import java.util.EnumSet;
+
+import javax.servlet.DispatcherType;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
+
+import lombok.val;
 
 public class WebProjectConfigInitializer implements WebApplicationInitializer {
 
 	@Override
 	public void onStartup(ServletContext container) throws ServletException {
 //		container.getServletContextName();
-		
+
 		// Create the spring rest servlet's Spring application context
-        AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
-        dispatcherContext.register(Config.class);
+		AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
+		dispatcherContext.register(Config.class);
 
-        // Register and map the spring rest servlet
-        ServletRegistration.Dynamic dispatcher = container.addServlet("HelloWeb",
-                new DispatcherServlet(dispatcherContext));
-        dispatcher.setLoadOnStartup(1);
+		// Register and map the spring rest servlet
+		ServletRegistration.Dynamic dispatcher = container.addServlet("HelloWeb",
+				new DispatcherServlet(dispatcherContext));
+		dispatcher.setLoadOnStartup(1);
 //        dispatcher.setAsyncSupported(true);
-        dispatcher.addMapping("/");
+		dispatcher.addMapping("/");
 
+//		val springSecurityFilterChain = container.addFilter("springSecurityFilterChain", new DelegatingFilterProxy());
+//		springSecurityFilterChain.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), true, "/*");
 	}
-
+	
 }
