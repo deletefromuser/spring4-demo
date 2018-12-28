@@ -5,13 +5,13 @@ import org.springframework.context.support.AbstractApplicationContext;
 
 import com.github.dozermapper.core.Mapper;
 
-import config.Config;
+import config.AppcationContextConfig;
 import dao.Student;
 import mybatis.entity.Student2;
 
 public class Main {
 	public static void main(String[] args) {
-		AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);
+		AbstractApplicationContext ctx = new AnnotationConfigApplicationContext(AppcationContextConfig.class);
 		Mapper dozerMapper = (Mapper) ctx.getBean("dozerMapper");
 		Worker worker = dozerMapper.map((Student) ctx.getBean("student1"), Worker.class);
 		System.out.println(dozerMapper);

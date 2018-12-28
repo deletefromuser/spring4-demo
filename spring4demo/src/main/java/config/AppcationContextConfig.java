@@ -27,7 +27,7 @@ import dao.Student;
 
 @Configuration
 @ComponentScan("service,servlet,controller")
-public class Config implements ApplicationContextAware {
+public class AppcationContextConfig implements ApplicationContextAware {
 
 	private ApplicationContext applicationContext;
 
@@ -80,7 +80,7 @@ public class Config implements ApplicationContextAware {
 		resolver.setPrefix("/WEB-INF/");
 		resolver.setSuffix(".jsp");
 		resolver.setViewNames("jsp/*");
-		resolver.setOrder(1);
+		resolver.setOrder(2);
 		return resolver;
 	}
 
@@ -108,7 +108,7 @@ public class Config implements ApplicationContextAware {
 		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
 		viewResolver.setTemplateEngine(templateEngine());
 		viewResolver.setCharacterEncoding("UTF-8");
-		viewResolver.setOrder(2);
+		viewResolver.setOrder(1);
 		viewResolver.setViewNames(new String[] { "thymeleaf/*" });
 		return viewResolver;
 	}

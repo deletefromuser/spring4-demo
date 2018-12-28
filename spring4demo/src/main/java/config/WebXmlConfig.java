@@ -13,9 +13,9 @@ import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import lombok.val;
-import springSecurity.SecurityWebApplicationInitializer;
+import springSecurity.WebSecurityConfig;
 
-public class WebProjectConfigInitializer implements WebApplicationInitializer {
+public class WebXmlConfig implements WebApplicationInitializer {
 
 	@Override
 	public void onStartup(ServletContext container) throws ServletException {
@@ -23,7 +23,7 @@ public class WebProjectConfigInitializer implements WebApplicationInitializer {
 
 		// Create the spring rest servlet's Spring application context
 		AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
-		dispatcherContext.register(Config.class, SecurityWebApplicationInitializer.class);
+		dispatcherContext.register(AppcationContextConfig.class, WebSecurityConfig.class);
 
 		// Register and map the spring rest servlet
 		ServletRegistration.Dynamic dispatcher = container.addServlet("HelloWeb",
@@ -33,7 +33,7 @@ public class WebProjectConfigInitializer implements WebApplicationInitializer {
 		dispatcher.addMapping("/");
 
 		val springSecurityFilterChain = container.addFilter("springSecurityFilterChain", new DelegatingFilterProxy());
-		springSecurityFilterChain.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), true, "/*");
+		springSecurityFilterChain.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), true, "/hello/calc/*");
 	}
 
 }

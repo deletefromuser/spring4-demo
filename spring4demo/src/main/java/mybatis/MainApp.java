@@ -10,7 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import config.Config;
+import config.AppcationContextConfig;
 import dao.Student;
 import mybatis.entity.Pet;
 import mybatis.mapper.PetMapper;
@@ -37,7 +37,7 @@ public class MainApp {
 				System.out.println(", Age : " + stu.getAge());
 
 //				PetMapper pm = session.getMapper(PetMapper.class);
-				PetMapper pm = new AnnotationConfigApplicationContext(Config.class).getBean(PetMapper.class);
+				PetMapper pm = new AnnotationConfigApplicationContext(AppcationContextConfig.class).getBean(PetMapper.class);
 				Pet pet = new Pet();
 				pet.setBirth(new Date());
 				pet.setDeath(new Date());
