@@ -13,6 +13,7 @@ import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import lombok.val;
+import springSecurity.SecurityWebApplicationInitializer;
 
 public class WebProjectConfigInitializer implements WebApplicationInitializer {
 
@@ -22,7 +23,7 @@ public class WebProjectConfigInitializer implements WebApplicationInitializer {
 
 		// Create the spring rest servlet's Spring application context
 		AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
-		dispatcherContext.register(Config.class);
+		dispatcherContext.register(Config.class, SecurityWebApplicationInitializer.class);
 
 		// Register and map the spring rest servlet
 		ServletRegistration.Dynamic dispatcher = container.addServlet("HelloWeb",
@@ -31,8 +32,8 @@ public class WebProjectConfigInitializer implements WebApplicationInitializer {
 //        dispatcher.setAsyncSupported(true);
 		dispatcher.addMapping("/");
 
-//		val springSecurityFilterChain = container.addFilter("springSecurityFilterChain", new DelegatingFilterProxy());
-//		springSecurityFilterChain.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), true, "/*");
+		val springSecurityFilterChain = container.addFilter("springSecurityFilterChain", new DelegatingFilterProxy());
+		springSecurityFilterChain.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), true, "/*");
 	}
-	
+
 }
