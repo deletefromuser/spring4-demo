@@ -26,7 +26,7 @@ import com.github.dozermapper.spring.DozerBeanMapperFactoryBean;
 import dao.Student;
 
 @Configuration
-@ComponentScan("service,servlet,controller")
+@ComponentScan("service,servlet,controller,springSecurity")
 public class AppcationContextConfig implements ApplicationContextAware {
 
 	private ApplicationContext applicationContext;

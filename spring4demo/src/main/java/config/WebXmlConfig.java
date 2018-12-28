@@ -33,7 +33,7 @@ public class WebXmlConfig implements WebApplicationInitializer {
 		dispatcher.addMapping("/");
 
 		val springSecurityFilterChain = container.addFilter("springSecurityFilterChain", new DelegatingFilterProxy());
-		springSecurityFilterChain.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), true, "/hello/calc/*");
+		springSecurityFilterChain.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), true, "/*");
 	}
 
 }
