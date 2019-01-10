@@ -13,14 +13,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/admin/**").hasRole("USER").and().formLogin()// .and().httpBasic();
-				.loginPage("/admin/login").permitAll();
+		http.authorizeRequests().antMatchers("/logouted", "/hello/**", "/").permitAll()
+		.antMatchers("/admin/**").hasRole("USER")
+		.anyRequest().authenticated().and().formLogin()// .and().httpBasic();
+				.loginPage("/login").permitAll();
+		http.csrf().disable();
+		http.logout().logoutUrl("/logout").logoutSuccessUrl("/logouted");
 	}
 
 	@Bean
 	public UserDetailsService userDetailsService() {
 		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
 		manager.createUser(User.withUsername("user").password("password").roles("USER").build());
+		manager.createUser(User.withUsername("tom").password("1").roles("USER").build());
 		return manager;
 	}
 }

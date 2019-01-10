@@ -39,7 +39,14 @@ public class StudentServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String user = req.getParameter("id");
 
-		Student stu = studentService.getStudent(Integer.parseInt(user));
+		int id;
+		try {
+		 id = Integer.parseInt(user);
+		} catch (Exception e) {
+			id = 0;
+		}
+
+		Student stu = studentService.getStudent(id);
 
 //		resp.setContentType("text/html");
 //		resp.setCharacterEncoding("UTF-8");

@@ -14,6 +14,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.thymeleaf.spring4.SpringTemplateEngine;
@@ -26,6 +27,7 @@ import com.github.dozermapper.spring.DozerBeanMapperFactoryBean;
 import dao.Student;
 
 @Configuration
+@EnableGlobalMethodSecurity
 @ComponentScan("service,servlet,controller,springSecurity")
 public class AppcationContextConfig implements ApplicationContextAware {
 
