@@ -20,6 +20,7 @@
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
+			<property name="constructorBased" value="true" />
 		</javaModelGenerator>
 
 		<sqlMapGenerator targetPackage="mybatis.xml"
@@ -40,6 +41,19 @@
 		</table>
 
 		<table tableName="student" domainObjectName="Student2"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table tableName="users" domainObjectName="Users"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+			<columnOverride column="enabled" javaType="boolean"/>
+		</table>
+		
+		<table tableName="authorities" domainObjectName="Authorities"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">

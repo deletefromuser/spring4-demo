@@ -7,6 +7,16 @@ public class Student2 {
 
     private Integer age;
 
+    public Student2(Integer id, String name, Integer age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
+
+    public Student2() {
+        super();
+    }
+
     public Integer getId() {
         return id;
     }

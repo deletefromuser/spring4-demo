@@ -2,12 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mybatis.mapper.PetMapper">
   <resultMap id="BaseResultMap" type="mybatis.entity.Pet">
-    <id column="name" jdbcType="VARCHAR" property="name" />
-    <result column="owner" jdbcType="VARCHAR" property="owner" />
-    <result column="species" jdbcType="VARCHAR" property="species" />
-    <result column="sex" jdbcType="CHAR" property="sex" />
-    <result column="birth" jdbcType="DATE" property="birth" />
-    <result column="death" jdbcType="DATE" property="death" />
+    <constructor>
+      <idArg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="owner" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="species" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="sex" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="birth" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="death" javaType="java.util.Date" jdbcType="DATE" />
+    </constructor>
   </resultMap>
   <sql id="Base_Column_List">
     name, owner, species, sex, birth, death

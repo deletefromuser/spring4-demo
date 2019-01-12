@@ -2,9 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mybatis.mapper.Student2Mapper">
   <resultMap id="BaseResultMap" type="mybatis.entity.Student2">
-    <id column="ID" jdbcType="INTEGER" property="id" />
-    <result column="NAME" jdbcType="VARCHAR" property="name" />
-    <result column="AGE" jdbcType="INTEGER" property="age" />
+    <constructor>
+      <idArg column="ID" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="AGE" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
   </resultMap>
   <sql id="Base_Column_List">
     ID, NAME, AGE

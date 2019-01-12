@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.AuthoritiesMapper">
+  <resultMap id="BaseResultMap" type="mybatis.entity.Authorities">
+    <constructor>
+      <arg column="username" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="authority" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="mybatis.entity.Authorities">
+    insert into authorities (username, authority)
+    values (#{username,jdbcType=VARCHAR}, #{authority,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="mybatis.entity.Authorities">
+    insert into authorities
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        username,
+      </if>
+      <if test="authority != null">
+        authority,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="authority != null">
+        #{authority,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -90,7 +90,7 @@ public class AppcationContextConfig implements ApplicationContextAware {
 	public ITemplateResolver templateResolver() {
 		SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
 		templateResolver.setApplicationContext(this.applicationContext);
-		templateResolver.setTemplateMode("HTML5");
+		templateResolver.setTemplateMode("HTML");
 		templateResolver.setPrefix("/WEB-INF/");
 		templateResolver.setSuffix(".html");
 		templateResolver.setCharacterEncoding("UTF-8");

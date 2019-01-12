@@ -15,6 +15,19 @@ public class Pet {
 
     private Date death;
 
+    public Pet(String name, String owner, String species, String sex, Date birth, Date death) {
+        this.name = name;
+        this.owner = owner;
+        this.species = species;
+        this.sex = sex;
+        this.birth = birth;
+        this.death = death;
+    }
+
+    public Pet() {
+        super();
+    }
+
     public String getName() {
         return name;
     }

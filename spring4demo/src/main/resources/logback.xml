@@ -22,4 +22,7 @@
 	<logger name="com" level="info">
 		<appender-ref ref="FILE" />
 	</logger>
+	<logger name="org.mybatis" level="trace">
+		<appender-ref ref="STDOUT" />
+	</logger>
 </configuration>
