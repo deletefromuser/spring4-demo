@@ -21,7 +21,7 @@ public class Main {
 
 		Dog foo = new Dog();
 		foo.shout();
-		logger.info("Exiting application.");
+		logger.info("Exiting application."); 
 	}
 
 }
