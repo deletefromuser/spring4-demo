@@ -35,5 +35,8 @@ create table group_members (
 );
 
 
-insert into users(username, password, enabled) values("tom", 1, true), ("jack", 2, true);
-insert into authorities(username, authority) values("tom", "ROLE_ADMIN"), ("jack", "ROLE_USER");
+-- insert into users(username, password, enabled) values("tom", 1, true), ("jack", 2, true);
+-- insert into authorities(username, authority) values("tom", "ROLE_ADMIN"), ("jack", "ROLE_USER");
+
+-- select * from users
+-- select * from authorities
