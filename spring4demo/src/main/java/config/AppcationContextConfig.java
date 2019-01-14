@@ -15,7 +15,12 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.support.RequestDataValueProcessor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
@@ -25,11 +30,14 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 import com.github.dozermapper.spring.DozerBeanMapperFactoryBean;
 
 import dao.Student;
+import springSecurity.csrf.CSRFHandlerInterceptor;
+import springSecurity.csrf.CSRFRequestDataValueProcessor;
 
 @Configuration
+@EnableWebMvc
 @EnableGlobalMethodSecurity
 @ComponentScan("service,servlet,controller,springSecurity")
-public class AppcationContextConfig implements ApplicationContextAware {
+public class AppcationContextConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware {
 
 	private ApplicationContext applicationContext;
 
@@ -51,7 +59,8 @@ public class AppcationContextConfig implements ApplicationContextAware {
 	public SqlSessionFactoryBean sqlSessionFactory(ResourcePatternResolver resourcePatternResolver) throws IOException {
 		SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
 		factory.setDataSource(datasource());
-//		factory.setConfigLocation(new ClassPathResource("mybatis/mybatis_config.xml"));
+		// factory.setConfigLocation(new
+		// ClassPathResource("mybatis/mybatis_config.xml"));
 		factory.setMapperLocations(resourcePatternResolver.getResources("classpath*:mybatis/**/*apper.xml"));
 		return factory;
 	}
@@ -130,6 +139,17 @@ public class AppcationContextConfig implements ApplicationContextAware {
 		stu.setId(3652);
 		stu.setName("tom");
 		return stu;
+	}
+	
+	@Bean
+	public CSRFRequestDataValueProcessor requestDataValueProcessor() {
+		return new CSRFRequestDataValueProcessor();
+//		return new CsrfRequestDataValueProcessor();
+	}
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new CSRFHandlerInterceptor());
 	}
 
 }

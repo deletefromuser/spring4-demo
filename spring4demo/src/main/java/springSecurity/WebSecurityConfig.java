@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						response.sendRedirect("login?error");
 					}
 				});
-		http.csrf().disable();
+//		http.csrf().disable();
 		http.logout().logoutUrl("/logout").logoutSuccessUrl("/login");
 	}
 
@@ -69,5 +69,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //	public BCryptPasswordEncoder passwordEncoder() {
 //		return new BCryptPasswordEncoder();
 //	}
-
+	
 }

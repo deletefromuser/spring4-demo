@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/hello")
 public class HelloController {
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(method = { RequestMethod.GET, RequestMethod.POST })
 	public String printHello(ModelMap model) {
 		model.addAttribute("message", "Spring MVC Framework by thymeleaf!");
 		return "thymeleaf/hello";
 	}
-	
-	@RequestMapping(value="/jsp", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/jsp", method = RequestMethod.GET)
 	public String printHelloJsp(ModelMap model) {
 		model.addAttribute("message", "Spring MVC Framework by jsp!");
 		return "jsp/hello";

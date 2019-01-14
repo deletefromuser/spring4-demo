@@ -6,5 +6,20 @@
 </head>
 <body style="font-weight: bolder;">
 	hello, <span th:text="${message}">test</span>!
+	
+	
+	<form th:action="@{hello}" method="post">
+
+		<p>
+			<label for="username">Username</label> <input type="text"
+				id="username" name="username" />
+		</p>
+		<p>
+			<label for="password">Password</label> <input type="password"
+				id="password" name="password" />
+		</p>
+		<button type="submit" class="btn">Log in</button>
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+	</form>
 </body>
 </html>
