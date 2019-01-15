@@ -140,16 +140,10 @@ public class AppcationContextConfig extends WebMvcConfigurerAdapter implements A
 		stu.setName("tom");
 		return stu;
 	}
-	
-	@Bean
-	public CSRFRequestDataValueProcessor requestDataValueProcessor() {
-		return new CSRFRequestDataValueProcessor();
-//		return new CsrfRequestDataValueProcessor();
-	}
 
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new CSRFHandlerInterceptor());
-	}
+//	@Override
+//	public void addInterceptors(InterceptorRegistry registry) {
+//		registry.addInterceptor(new CSRFHandlerInterceptor());
+//	}
 
 }

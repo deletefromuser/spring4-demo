@@ -22,6 +22,8 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
+import springSecurity.csrf.CSRFRequestDataValueProcessor;
+
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -39,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						response.sendRedirect("login?error");
 					}
 				});
-//		http.csrf().disable();
+		// http.csrf().disable();
 		http.logout().logoutUrl("/logout").logoutSuccessUrl("/login");
 	}
 
@@ -65,9 +67,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	// return new BCryptPasswordEncoder();
 	// }
 
+	// @Bean
+	// public BCryptPasswordEncoder passwordEncoder() {
+	// return new BCryptPasswordEncoder();
+	// }
+
 //	@Bean
-//	public BCryptPasswordEncoder passwordEncoder() {
-//		return new BCryptPasswordEncoder();
+//	public CSRFRequestDataValueProcessor requestDataValueProcessor() {
+//		return new CSRFRequestDataValueProcessor();
+//		// return new CsrfRequestDataValueProcessor();
 //	}
-	
 }
