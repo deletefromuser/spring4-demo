@@ -141,9 +141,9 @@ public class AppcationContextConfig extends WebMvcConfigurerAdapter implements A
 		return stu;
 	}
 
-//	@Override
-//	public void addInterceptors(InterceptorRegistry registry) {
-//		registry.addInterceptor(new CSRFHandlerInterceptor());
-//	}
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new CSRFHandlerInterceptor());
+	}
 
 }

@@ -72,9 +72,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	// return new BCryptPasswordEncoder();
 	// }
 
-//	@Bean
-//	public CSRFRequestDataValueProcessor requestDataValueProcessor() {
-//		return new CSRFRequestDataValueProcessor();
-//		// return new CsrfRequestDataValueProcessor();
-//	}
+	/***
+	 * 
+	 * @see <a href=
+	 *      "https://blog.eyallupu.com/2012/04/csrf-defense-in-spring-mvc-31.html">New
+	 *      in Spring MVC 3.1: CSRF Protection using
+	 *      RequestDataValueProcessor</a>
+	 */
+	@Bean
+	public CSRFRequestDataValueProcessor requestDataValueProcessor() {
+		return new CSRFRequestDataValueProcessor();
+		// return new CsrfRequestDataValueProcessor();
+	}
 }
