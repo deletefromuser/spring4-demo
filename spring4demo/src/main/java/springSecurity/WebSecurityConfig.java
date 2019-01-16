@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						response.sendRedirect("login?error");
 					}
 				});
-		// http.csrf().disable();
+		 http.csrf().disable();
 		http.logout().logoutUrl("/logout").logoutSuccessUrl("/login");
 	}
 
@@ -72,9 +72,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	// return new BCryptPasswordEncoder();
 	// }
 
-//	@Bean
-//	public CSRFRequestDataValueProcessor requestDataValueProcessor() {
-//		return new CSRFRequestDataValueProcessor();
-//		// return new CsrfRequestDataValueProcessor();
-//	}
+	@Bean
+	public CSRFRequestDataValueProcessor requestDataValueProcessor() {
+		return new CSRFRequestDataValueProcessor();
+	}
 }
