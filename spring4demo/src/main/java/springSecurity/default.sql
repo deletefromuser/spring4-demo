@@ -40,3 +40,13 @@ create table group_members (
 
 -- select * from users
 -- select * from authorities
+
+-- blog sql
+DROP TABLE IF EXISTS blog_content;
+create table blog_content (
+	id bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	title varchar(100) not null,
+	content text not null,
+	create_time datetime not null,
+	modify_time datetime not null
+);

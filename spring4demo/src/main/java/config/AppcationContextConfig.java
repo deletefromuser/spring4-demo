@@ -16,6 +16,8 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -30,13 +32,14 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 import com.github.dozermapper.spring.DozerBeanMapperFactoryBean;
 
 import dao.Student;
+import mybatis.entity.BlogContent;
 import springSecurity.csrf.CSRFHandlerInterceptor;
 import springSecurity.csrf.CSRFRequestDataValueProcessor;
 
 @Configuration
 @EnableWebMvc
 @EnableGlobalMethodSecurity
-@ComponentScan("service,servlet,controller,springSecurity")
+@ComponentScan("service,servlet,controller,springSecurity,blog")
 public class AppcationContextConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware {
 
 	private ApplicationContext applicationContext;
@@ -139,6 +142,12 @@ public class AppcationContextConfig extends WebMvcConfigurerAdapter implements A
 		stu.setId(3652);
 		stu.setName("tom");
 		return stu;
+	}
+
+	@Bean
+	@RequestScope
+	public BlogContent blogContent() {
+		return new BlogContent();
 	}
 
 	@Override
