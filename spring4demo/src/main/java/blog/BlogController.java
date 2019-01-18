@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import dao.Blog;
 import mybatis.entity.BlogContent;
+import mybatis.mapper.BlogContentMapper;
 
 @Controller
 @RequestMapping("/blogEdit")
@@ -27,6 +28,9 @@ public class BlogController {
 	@Autowired
 	Logger logger;
 
+	@Autowired
+	BlogContentMapper blogContentMapper;
+
 	@GetMapping()
 	public String init(BlogContent blog, ModelMap model) {
 		blog.setTitle("test bean");
@@ -37,6 +41,8 @@ public class BlogController {
 	@PostMapping()
 	public String create(@ModelAttribute BlogContent blog, ModelMap model) {
 		System.out.println(blog.getTitle());
+		int id = blogContentMapper.insertSelective(blog);
+		model.addAttribute("newid", id);
 		return "thymeleaf/blogEdit";
 	}
 

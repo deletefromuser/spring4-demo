@@ -47,6 +47,6 @@ create table blog_content (
 	id bigint NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	title varchar(100) not null,
 	content text not null,
-	create_time datetime not null,
-	modify_time datetime not null
+	create_time datetime not null default '19000101',
+	modify_time datetime not null default '19000101'
 );
