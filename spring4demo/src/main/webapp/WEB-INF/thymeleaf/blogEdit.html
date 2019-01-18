@@ -16,16 +16,19 @@
 	<div class="container">
 		<h2>请输入</h2>
 
-		<form th:action="@{blogEdit}" th:object="${content}" method="post">
+		<form th:action="@{blogEdit}" method="post">
 
-			<div class="row justify-content-center">
+			<div class="row justify-content-center" th:object="${blogContent}">
 				<div class="col-10">
 					title: <input type="text" class="w-100" th:field="*{title}"></input>
 				</div>
 				<div class="col-10 my-4">
 					content:
-					<textarea class="w-100" th:value="*{content}"></textarea>
+					<textarea class="w-100" th:field="*{content}"></textarea>
 				</div>
+				<input type="hidden" th:field="*{id}"></input>
+				<input type="hidden" th:field="*{createTime}"></input>
+				<input type="hidden" th:field="*{modifyTime}"></input>
 			</div>
 			<button type="submit" class="btn btn-primary">创建</button>
 		</form>

@@ -1,28 +1,33 @@
 package config;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.ResourcePatternResolver;
+import org.springframework.format.Formatter;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor;
-import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.support.RequestDataValueProcessor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
@@ -31,10 +36,10 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import com.github.dozermapper.spring.DozerBeanMapperFactoryBean;
 
+import dao.Blog;
 import dao.Student;
 import mybatis.entity.BlogContent;
 import springSecurity.csrf.CSRFHandlerInterceptor;
-import springSecurity.csrf.CSRFRequestDataValueProcessor;
 
 @Configuration
 @EnableWebMvc
@@ -149,10 +154,48 @@ public class AppcationContextConfig extends WebMvcConfigurerAdapter implements A
 	public BlogContent blogContent() {
 		return new BlogContent();
 	}
+	
+	@Bean
+	@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+	public Blog blog() {
+		return new Blog();
+	}
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new CSRFHandlerInterceptor());
+	}
+	
+	@Bean
+	@RequestScope
+	public Logger logger() {
+		return LoggerFactory.getLogger("test");
+	}
+	
+	@Override
+	public void addFormatters(FormatterRegistry registry) {
+		super.addFormatters(registry);
+		registry.addFormatter(new Formatter<Date>() {
+
+			@Override
+			public String print(Date object, Locale locale) {
+				return object.toString();
+			}
+
+			@Override
+			public Date parse(String text, Locale locale) throws ParseException {
+				Date date = new Date();
+				
+				try {
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+					date = sdf.parse(text);
+				} catch (Exception e) {
+					
+				}
+				
+				return date;
+			}
+		});
 	}
 
 }

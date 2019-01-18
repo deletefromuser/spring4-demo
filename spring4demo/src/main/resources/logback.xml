@@ -19,13 +19,16 @@
 		</encoder>
 	</appender>
 
-	<root level="debug">
+	<root level="warn">
 		<appender-ref ref="STDOUT" />
 	</root>
 	<logger name="com" level="info">
 		<appender-ref ref="FILE" />
 	</logger>
 	<logger name="mybatis" level="debug">
+		<appender-ref ref="STDOUT" />
+	</logger>
+	<logger name="test" level="warn">
 		<appender-ref ref="STDOUT" />
 	</logger>
 </configuration>
