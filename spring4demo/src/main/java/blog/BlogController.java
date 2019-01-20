@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.dozermapper.core.Mapper;
 
+import bean.User;
 import dao.Blog;
 import mybatis.entity.BlogContent;
+import mybatis.entity.Users;
 import mybatis.mapper.BlogContentMapper;
 
 @Controller
@@ -42,28 +44,10 @@ public class BlogController {
 	@Autowired
 	BlogDto sessionScopeTest;
 
-	// @Autowired
-	// Blog item;
-
-	// @GetMapping()
-	// public String init(BlogContent blogContent, Blog item, ModelMap model) {
-	// blogContent.setTitle("test bean");
-	// item.setContent("holy shit");
-	// return "thymeleaf/blogEdit";
-	// }
-	//
-	// @PostMapping()
-	// public String create(BlogContent blogContent, Blog blog, ModelMap model)
-	// {
-	// logger.warn(blogContent.getTitle());
-	// logger.warn(blogContent.getContent());
-	// logger.warn(blog.getTitle());
-	// logger.warn(blog.getContent());
-	//
-	// int id = blogContentMapper.insertSelective(blogContent);
-	// model.addAttribute("newid", id);
-	// return "thymeleaf/blogEdit";
-	// }
+	@ModelAttribute
+	public Users getUser() {
+		return new Users("modelAttribute_user", "modelAttribute_pass", true);
+	}
 
 	@GetMapping()
 	public String init(BlogDto blogContent, ModelMap model) {

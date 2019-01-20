@@ -31,7 +31,8 @@
 
 			<div class="row justify-content-center my-4">
 				<div class="col-10">
-					title: <input type="text" class="w-100 form-control" th:field="*{title}"></input>
+					title: <input type="text" class="w-100 form-control"
+						th:field="*{title}"></input>
 				</div>
 				<div class="col-10 my-4">
 					content:
@@ -42,9 +43,14 @@
 
 		</form>
 
-		<div class="m-4 p-3 border border-dark shadow text-danger">
+		<div class="m-3 p-3 border border-dark shadow">
 			sessionScopeTest :
 			<li th:text="${@blogDtoSeesion.title}">error</li>
+			<div class="m-2 p-2 border border-info">
+				<h2>@modelAttribute Test</h2>
+				<p th:text="'username is ' + ${users.username}"></p>
+				<p th:text="'password is ' + ${users.password}"></p>
+			</div>
 		</div>
 	</div>
 </body>
