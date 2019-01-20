@@ -5,9 +5,15 @@
 <title>hello thymeleaf</title>
 </head>
 <body style="font-weight: bolder;">
-	hello, <span th:text="${message}">test</span>!
-	
-	
+	hello,
+	<span th:text="${message}">test</span>!
+
+	<div class="m-4 p-3 border border-dark shadow text-danger">
+		sessionScopeTest :
+		<li th:text="${@blogDtoSeesion.title}">error</li>
+	</div>
+
+
 	<form th:action="@{hello}" method="post">
 
 		<p>

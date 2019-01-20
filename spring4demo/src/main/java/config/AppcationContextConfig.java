@@ -24,6 +24,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.web.context.annotation.RequestScope;
+import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -163,9 +164,9 @@ public class AppcationContextConfig extends WebMvcConfigurerAdapter implements A
 	}
 	
 	@Bean
-	@RequestScope
-	public BlogDto blogDto(BlogContent blogContent, Blog blog) {
-		return new BlogDto(blogContent, blog);
+	@SessionScope
+	public BlogDto blogDtoSeesion() {
+		return new BlogDto();
 	}
 
 	@Override
