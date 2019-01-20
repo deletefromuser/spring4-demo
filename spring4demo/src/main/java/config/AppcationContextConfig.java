@@ -36,6 +36,7 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import com.github.dozermapper.spring.DozerBeanMapperFactoryBean;
 
+import blog.BlogDto;
 import dao.Blog;
 import dao.Student;
 import mybatis.entity.BlogContent;
@@ -159,6 +160,12 @@ public class AppcationContextConfig extends WebMvcConfigurerAdapter implements A
 	@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 	public Blog blog() {
 		return new Blog();
+	}
+	
+	@Bean
+	@RequestScope
+	public BlogDto blogDto(BlogContent blogContent, Blog blog) {
+		return new BlogDto(blogContent, blog);
 	}
 
 	@Override

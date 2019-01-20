@@ -14,26 +14,50 @@
 
 <body style="font-weight: bolder;">
 	<div class="container">
-	<div th:if="${id} != null" class="m-4 border">
-	新建了博文，id为<span th:value="*{id}"></span>
-	</div>
+		<div th:if="${newid} != null" class="m-4 p-3 border border-dark shadow">
+			新建了博文，id为<span th:text="${newid}">null</span>
+		</div>
 		<h2>请输入</h2>
 
 		<form th:action="@{blogEdit}" method="post">
 
-			<div class="row justify-content-center" th:object="${blogContent}">
+			<div class="row justify-content-center my-4"
+				th:object="${blogDto.blogContent}">
 				<div class="col-10">
-					title: <input type="text" class="w-100" th:field="*{title}"></input>
+					title:
+					<input type="text" class="w-100" th:field="*{title}"></input>
 				</div>
 				<div class="col-10 my-4">
 					content:
 					<textarea class="w-100" th:field="*{content}"></textarea>
 				</div>
-				<input type="hidden" th:field="*{id}"></input>
+<!-- 				<input type="hidden" th:field="*{id}"></input> -->
 				<input type="hidden" th:field="*{createTime}"></input>
 				<input type="hidden" th:field="*{modifyTime}"></input>
 			</div>
 			<button type="submit" class="btn btn-primary">创建</button>
+
+			<!-- 			<div class="row justify-content-center border" th:object="${item}"> -->
+			<!-- 				<h2>${item}</h2> -->
+			<!-- 				<div class="col-10"> -->
+			<!-- 					title: <input type="text" class="w-100" th:field="*{title}"></input> -->
+			<!-- 				</div> -->
+			<!-- 				<div class="col-10 my-4"> -->
+			<!-- 					content: -->
+			<!-- 					<textarea class="w-100" th:field="*{content}"></textarea> -->
+			<!-- 				</div> -->
+			<!-- 			</div> -->
+			<div class="row justify-content-center bordermy-4">
+				<h2 class="w-100">${blog}</h2>
+				<div class="col-10">
+					title:
+					<input type="text" class="w-100" th:field="${blogDto.blog.title}"></input>
+				</div>
+				<div class="col-10 my-4">
+					content:
+					<textarea class="w-100" th:field="${blogDto.blog.content}"></textarea>
+				</div>
+			</div>
 		</form>
 	</div>
 </body>

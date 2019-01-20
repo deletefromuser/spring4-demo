@@ -29,4 +29,16 @@ public class Authorities {
     public void setAuthority(String authority) {
         this.authority = authority == null ? null : authority.trim();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", username=").append(username);
+        sb.append(", authority=").append(authority);
+        sb.append("]");
+        return sb.toString();
+    }
 }

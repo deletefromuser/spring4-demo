@@ -75,4 +75,20 @@ public class Pet {
     public void setDeath(Date death) {
         this.death = death;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", name=").append(name);
+        sb.append(", owner=").append(owner);
+        sb.append(", species=").append(species);
+        sb.append(", sex=").append(sex);
+        sb.append(", birth=").append(birth);
+        sb.append(", death=").append(death);
+        sb.append("]");
+        return sb.toString();
+    }
 }

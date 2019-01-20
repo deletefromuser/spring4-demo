@@ -31,26 +31,43 @@ public class BlogController {
 	@Autowired
 	BlogContentMapper blogContentMapper;
 
+	// @Autowired
+	// Blog item;
+
+	// @GetMapping()
+	// public String init(BlogContent blogContent, Blog item, ModelMap model) {
+	// blogContent.setTitle("test bean");
+	// item.setContent("holy shit");
+	// return "thymeleaf/blogEdit";
+	// }
+	//
+	// @PostMapping()
+	// public String create(BlogContent blogContent, Blog blog, ModelMap model)
+	// {
+	// logger.warn(blogContent.getTitle());
+	// logger.warn(blogContent.getContent());
+	// logger.warn(blog.getTitle());
+	// logger.warn(blog.getContent());
+	//
+	// int id = blogContentMapper.insertSelective(blogContent);
+	// model.addAttribute("newid", id);
+	// return "thymeleaf/blogEdit";
+	// }
+
 	@GetMapping()
-	public String init(BlogContent blog, ModelMap model) {
-		blog.setTitle("test bean");
-		// model.addAttribute("blog", blog);
+	public String init(BlogDto blogContent, ModelMap model) {
+//		blogContent.getBlogContent().setTitle("test bean");
+//		blogContent.getBlog().setContent("holy shit");
 		return "thymeleaf/blogEdit";
 	}
 
 	@PostMapping()
-	public String create(@ModelAttribute BlogContent blog, ModelMap model) {
-		System.out.println(blog.getTitle());
-		int id = blogContentMapper.insertSelective(blog);
-		model.addAttribute("newid", id);
+	public String create(BlogDto blogContent, ModelMap model) {
+		logger.warn(blogContent.toString());
+
+		blogContentMapper.insertSelective(blogContent.getBlogContent());
+		model.addAttribute("newid", blogContent.getBlogContent().getId());
 		return "thymeleaf/blogEdit";
 	}
-
-	// @PostMapping()
-	// public String create(@RequestParam String title, @RequestParam("content")
-	// String con, ModelMap model) {
-	// logger.warn(title + con);
-	// return "thymeleaf/blogEdit";
-	// }
 
 }

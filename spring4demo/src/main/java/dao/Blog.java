@@ -2,6 +2,9 @@ package dao;
 
 import java.util.Date;
 
+import lombok.ToString;
+
+@ToString
 public class Blog {
 	private String title;
 

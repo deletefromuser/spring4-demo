@@ -40,4 +40,17 @@ public class Users {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", username=").append(username);
+        sb.append(", password=").append(password);
+        sb.append(", enabled=").append(enabled);
+        sb.append("]");
+        return sb.toString();
+    }
 }
