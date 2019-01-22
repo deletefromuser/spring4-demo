@@ -11,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,11 +24,12 @@ import com.github.dozermapper.core.Mapper;
 import bean.User;
 import dao.Blog;
 import mybatis.entity.BlogContent;
+import mybatis.entity.BlogContentExample;
 import mybatis.entity.Users;
 import mybatis.mapper.BlogContentMapper;
 
 @Controller
-@RequestMapping("/blogEdit")
+@RequestMapping("/blog")
 public class BlogController {
 
 	// @Autowired
@@ -34,43 +37,49 @@ public class BlogController {
 
 	@Autowired
 	Logger logger;
-	
+
 	@Autowired
 	Mapper mapper;
 
 	@Autowired
 	BlogContentMapper blogContentMapper;
-	
-	@Autowired
-	BlogDto sessionScopeTest;
 
-	@ModelAttribute
-	public Users getUser() {
-		return new Users("modelAttribute_user", "modelAttribute_pass", true);
-	}
-
-	@GetMapping()
+	@GetMapping("/new")
 	public String init(BlogDto blogContent, ModelMap model) {
-//		blogContent.getBlogContent().setTitle("test bean");
-//		blogContent.getBlog().setContent("holy shit");
-		sessionScopeTest.setTitle("sessionTest1");
-		return "thymeleaf/blogEdit";
+		return "thymeleaf/blog/blogEdit";
 	}
 
-	@PostMapping()
-	public String create(@Valid BlogDto blogDto, BindingResult bindingResult,ModelMap model) {
+	@PostMapping("/create")
+	public String create(@Valid BlogDto blogDto, BindingResult bindingResult, ModelMap model) {
 		logger.warn(blogDto.toString());
-		
-		if(bindingResult.hasErrors()) {
-			return "thymeleaf/blogEdit";
+
+		if (bindingResult.hasErrors()) {
+			return "thymeleaf/blog/blogEdit";
 		}
-		
+
 		BlogContent newBlog = mapper.map(blogDto, BlogContent.class);
 
 		blogContentMapper.insertSelective(newBlog);
-		model.addAttribute("newid", newBlog.getId());
-		sessionScopeTest.setTitle("sessionTest2");
-		return "thymeleaf/blogEdit";
+		// model.addAttribute("newid", newBlog.getId());
+		return "redirect:/blog/list";
+	}
+
+	@GetMapping("/list")
+	public String list(ModelMap model) {
+		model.addAttribute("blogList", blogContentMapper.selectByExample(new BlogContentExample()));
+		return "thymeleaf/blog/blogList";
+	}
+
+	@GetMapping("/{id}")
+	public String view(@PathVariable Long id, ModelMap model) {
+		model.addAttribute("blog", blogContentMapper.selectByPrimaryKey(id));
+		return "thymeleaf/blog/blog";
+	}
+
+	@DeleteMapping("/{id}")
+	public String delete(@PathVariable Long id, ModelMap model) {
+		model.addAttribute("blog", blogContentMapper.deleteByPrimaryKey(id));
+		return "redirect:/blog/list";
 	}
 
 }
