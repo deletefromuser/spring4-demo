@@ -36,6 +36,9 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import com.github.dozermapper.spring.DozerBeanMapperFactoryBean;
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.options.MutableDataSet;
 
 import blog.BlogDto;
 import dao.Blog;
@@ -156,13 +159,13 @@ public class AppcationContextConfig extends WebMvcConfigurerAdapter implements A
 	public BlogContent blogContent() {
 		return new BlogContent();
 	}
-	
+
 	@Bean
 	@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 	public Blog blog() {
 		return new Blog();
 	}
-	
+
 	@Bean
 	@SessionScope
 	public BlogDto blogDtoSeesion() {
@@ -173,13 +176,13 @@ public class AppcationContextConfig extends WebMvcConfigurerAdapter implements A
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new CSRFHandlerInterceptor());
 	}
-	
+
 	@Bean
 	@RequestScope
 	public Logger logger() {
 		return LoggerFactory.getLogger("test");
 	}
-	
+
 	@Override
 	public void addFormatters(FormatterRegistry registry) {
 		super.addFormatters(registry);
@@ -193,17 +196,29 @@ public class AppcationContextConfig extends WebMvcConfigurerAdapter implements A
 			@Override
 			public Date parse(String text, Locale locale) throws ParseException {
 				Date date = new Date();
-				
+
 				try {
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 					date = sdf.parse(text);
 				} catch (Exception e) {
-					
+
 				}
-				
+
 				return date;
 			}
 		});
+	}
+
+	@Bean
+	public Parser markdownParser() {
+		MutableDataSet options = new MutableDataSet();
+		return Parser.builder(options).build();
+	}
+
+	@Bean
+	public HtmlRenderer markdownRender() {
+		MutableDataSet options = new MutableDataSet();
+		return HtmlRenderer.builder(options).build();
 	}
 
 }

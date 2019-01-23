@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.dozermapper.core.Mapper;
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
 
 import bean.User;
 import dao.Blog;
@@ -43,6 +45,12 @@ public class BlogController {
 
 	@Autowired
 	BlogContentMapper blogContentMapper;
+	
+	@Autowired
+	Parser markdownParser;
+	
+	@Autowired
+	HtmlRenderer markdownRender;
 
 	@GetMapping("/new")
 	public String init(BlogDto blogContent, ModelMap model) {
@@ -72,12 +80,14 @@ public class BlogController {
 
 	@GetMapping("/{id}")
 	public String view(@PathVariable Long id, ModelMap model) {
-		model.addAttribute("blog", blogContentMapper.selectByPrimaryKey(id));
+		BlogContent bc = blogContentMapper.selectByPrimaryKey(id);
+		model.addAttribute("blog", bc);
+		model.addAttribute("content", markdownRender.render(markdownParser.parse(bc.getContent())));
 		return "thymeleaf/blog/blog";
 	}
 
-	@DeleteMapping("/{id}")
-	public String delete(@PathVariable Long id, ModelMap model) {
+	@GetMapping("/delete")
+	public String delete(@RequestParam Long id, ModelMap model) {
 		model.addAttribute("blog", blogContentMapper.deleteByPrimaryKey(id));
 		return "redirect:/blog/list";
 	}
