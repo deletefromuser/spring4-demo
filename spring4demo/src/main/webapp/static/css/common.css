@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+.vc {
+	display: flex;
+	align-items: center;
+}
+
+.bg-lsb {
+	background: lightskyblue;
+}

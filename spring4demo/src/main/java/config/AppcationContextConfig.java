@@ -28,6 +28,7 @@ import org.springframework.web.context.annotation.SessionScope;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.thymeleaf.spring4.SpringTemplateEngine;
@@ -207,6 +208,11 @@ public class AppcationContextConfig extends WebMvcConfigurerAdapter implements A
 				return date;
 			}
 		});
+	}
+
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/js/**", "/css/**").addResourceLocations("/static/css/", "/static/js/");
 	}
 
 	@Bean
